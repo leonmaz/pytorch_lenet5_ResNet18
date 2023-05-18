@@ -10,9 +10,10 @@ import matplotlib.pyplot as plt
 import numpy as np 
 import os 
 
-from networks import ResNet, BasicBlock
+from models.networks import ResNet, BasicBlock
+from datasets.cifar10_load import load_cifar10
 
-path = 'models/cifar100_resnet.pth'
+path = './saved_models/cifar100_resnet.pth'
 if not os.path.exists(path):
     print("Model is not created, run file 'cifar100_SimpleCNNtrainer.py' first")
     exit()
@@ -23,7 +24,7 @@ model.load_state_dict(torch.load(path))
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
-    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+    transforms.Normalize(mean=(load_cifar10()[2],load_cifar10()[3],load_cifar10()[4]), std=(load_cifar10()[5],load_cifar10()[6],load_cifar10()[7]))])
 
 batch_size = 4
 

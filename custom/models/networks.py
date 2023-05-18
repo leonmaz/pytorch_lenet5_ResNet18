@@ -1,8 +1,8 @@
 #Simple CNN -> Simple Convolutional Neural based on LeNet-5 (https://ieeexplore.ieee.org/document/726791) 
-# --> CIFAR10 accuracy =~ 53% 
+# --> CIFAR10 accuracy =~ 54%, CIFAR100 =~ , MNIST =~ 98%
 
 #ResNet -> ResNet18 Residual Neural Network (https://arxiv.org/abs/1512.03385)
-# --> CIFAR10 accuracy =~ 74%
+# --> CIFAR10 accuracy =~ 74%, , CIFAR100 =~ , MNIST =~ 97%
 
 import torch
 import torch.nn as nn
@@ -15,7 +15,7 @@ from typing import Type
 class SimpleCNN(nn.Module):
     def __init__(self, in_channels: int, num_classes: int):
         super(SimpleCNN, self).__init__()
-        self.conv1 = nn.Conv2d(in_channels, 6, 5)			#Conv2d(input image channel (3 channels (R G B)), 6 output channels, 5x5 square convolution kernel) -> [28X28x6]
+        self.conv1 = nn.Conv2d(in_channels, 6, 5)			#Conv2d(input image channel (3 channels (CIFAR - R G B) or 1 (MNIST - Grayscale), 6 output channels, 5x5 square convolution kernel) -> [28X28x6]
         self.pool = nn.MaxPool2d(2, 2) 			#2x2 maxpooling (kernel_size=2, stride=2) -> [14x14x6]
         self.conv2 = nn.Conv2d(6, 16, 5)		#Conv2d(6 input, 16 output, 5x5 conv kernel) -> [10x10x16]
            

@@ -1,4 +1,6 @@
-nvflare>=2.2.1rc8
+nvflare>=2.3.0
 torch
 torchvision
 tensorboard
+matplotlib
+numpy

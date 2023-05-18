@@ -9,19 +9,21 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 import numpy as np 
 
-from networks import ResNet, BasicBlock
+from models.networks import ResNet, BasicBlock
+from datasets.mnist_load import load_mnist
 
 
 transform = transforms.Compose(
-    [transforms.ToTensor(),
-    transforms.Normalize((0.4914, 0.4822, 0.4465), (0.247, 0.243, 0.261))])
+    [transforms.Resize((32,32)),
+    transforms.ToTensor(),
+    transforms.Normalize(mean = (load_mnist()[1]), std = (load_mnist()[2]))])
 
 batch_size = 4
 
-trainset = torchvision.datasets.CIFAR10(root='./data', train=True, 
+trainset = torchvision.datasets.MNIST(root='./data', train=True, 
                                         download=True, transform=transform)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
-                                            shuffle=True, num_workers=10)
+                                            shuffle=True, num_workers=2)
 
 
 
@@ -29,7 +31,7 @@ device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using {device}")
 
 
-model = ResNet(3, 18, BasicBlock, 100)
+model = ResNet(1, 18, BasicBlock, 10)
 model.to(device)
 
 
@@ -37,7 +39,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
 
-for epoch in range(20):  # loop over the dataset multiple times
+for epoch in range(10):  # loop over the dataset multiple times
 
     running_loss = 0.0
     for i, (images, labels) in enumerate(trainloader):  
@@ -61,15 +63,8 @@ for epoch in range(20):  # loop over the dataset multiple times
 
 print('Finished Training')
 
-path = 'models/cifar100_resnet.pth'
+path = './saved_models/MNIST_resnet.pth'
 torch.save(model.state_dict(), path)
 
-# if __name__ == "__main__":
-#     training(model, trainloader)
-
-
-
-
-
-
+print('Model Saved')
 

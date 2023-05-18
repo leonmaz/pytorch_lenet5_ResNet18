@@ -12,7 +12,7 @@ import os
 
 from networks import SimpleCNN
 
-path = 'models/cifar100_simple.pth'
+path = './saved_models/cifar100_simple.pth'
 if not os.path.exists(path):
     print("Model is not created, run file 'cifar100_SimpleCNNtrainer.py' first")
     exit()

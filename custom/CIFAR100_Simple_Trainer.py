@@ -18,17 +18,18 @@ transform = transforms.Compose(
 
 batch_size = 4
 
-trainset = torchvision.datasets.CIFAR10(root='./data', train=True, 
+trainset = torchvision.datasets.CIFAR100(root='./data', train=True, 
                                         download=True, transform=transform)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
-                                            shuffle=True, num_workers=2)
+                                            shuffle=True, num_workers=10)
+
 
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print(f"Using {device}")
 
 
-model = SimpleCNN(3,10)
+model = SimpleCNN(3,100)
 model.to(device)
 
 
@@ -36,7 +37,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
 
-for epoch in range(2):  # loop over the dataset multiple times
+for epoch in range(20):  # loop over the dataset multiple times
 
     running_loss = 0.0
     for i, data in enumerate(trainloader, 0):
@@ -60,12 +61,11 @@ for epoch in range(2):  # loop over the dataset multiple times
 
 print('Finished Training')
 
-path = 'models/cifar10_simple.pth'
+path = './saved_models/cifar100_simple.pth'
 torch.save(model.state_dict(), path)
 
 # if __name__ == "__main__":
 #     training(model, trainloader)
-
 
 
 
