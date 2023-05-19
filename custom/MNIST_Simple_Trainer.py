@@ -1,5 +1,6 @@
 import torch
 import torchvision
+import os
 import torchvision.transforms as  transforms
 
 import torch.nn as nn 
@@ -61,6 +62,9 @@ for epoch in range(10):  # loop over the dataset multiple times
 
 print('Finished Training')
 
+
+if not os.path.exists('./saved_models'):
+    os.makedirs('./saved_models')
 path = './saved_models/mnist_simple.pth'
 torch.save(model.state_dict(), path)
 

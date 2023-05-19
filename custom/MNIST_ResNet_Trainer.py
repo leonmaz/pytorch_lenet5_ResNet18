@@ -63,6 +63,9 @@ for epoch in range(10):  # loop over the dataset multiple times
 
 print('Finished Training')
 
+
+if not os.path.exists('./saved_models'):
+    os.makedirs('./saved_models')
 path = './saved_models/MNIST_resnet.pth'
 torch.save(model.state_dict(), path)
 

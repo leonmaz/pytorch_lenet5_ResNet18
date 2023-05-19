@@ -11,11 +11,11 @@ import numpy as np
 import os 
 
 from models.networks import SimpleCNN
-from datasets.cifar10_load import load_cifar10
+from datasets.cifar10_load import cifar10_mean_std
 
 path = './saved_models/cifar10_simple.pth'
 if not os.path.exists(path):
-    print("Model is not created, run file 'SimpleCNNtrainer_central.py' first")
+    print("Model is not created, run file 'CIFAR10_Simple_Trainer.py' first")
     exit()
 
 model = SimpleCNN(3,10)
@@ -24,7 +24,7 @@ model.load_state_dict(torch.load(path))
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
-    transforms.Normalize(mean=(load_cifar10()[2],load_cifar10()[3],load_cifar10()[4]), std=(load_cifar10()[5],load_cifar10()[6],load_cifar10()[7]))])
+    transforms.Normalize(mean=(cifar10_mean_std()[1],cifar10_mean_std()[2],cifar10_mean_std()[3]), std=(cifar10_mean_std()[4],cifar10_mean_std()[5],cifar10_mean_std()[6]))])
 
 batch_size = 4
 

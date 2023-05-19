@@ -1,4 +1,5 @@
 import torch
+import os
 import torchvision
 import torchvision.transforms as  transforms
 
@@ -9,19 +10,20 @@ import torch.optim as optim
 import matplotlib.pyplot as plt
 import numpy as np 
 
-from networks import SimpleCNN
+from models.networks import SimpleCNN
+from datasets.cifar100_load import cifar100_mean_std
 
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
-    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+    transforms.Normalize(mean=(cifar100_mean_std()[1],cifar100_mean_std()[2],cifar100_mean_std()[3]), std=(cifar100_mean_std()[4],cifar100_mean_std()[5],cifar100_mean_std()[6]))])
 
 batch_size = 4
 
 trainset = torchvision.datasets.CIFAR100(root='./data', train=True, 
                                         download=True, transform=transform)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=batch_size,
-                                            shuffle=True, num_workers=10)
+                                            shuffle=True, num_workers=2)
 
 
 
@@ -37,7 +39,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
 
 
-for epoch in range(20):  # loop over the dataset multiple times
+for epoch in range(10):  # loop over the dataset multiple times
 
     running_loss = 0.0
     for i, data in enumerate(trainloader, 0):
@@ -61,11 +63,13 @@ for epoch in range(20):  # loop over the dataset multiple times
 
 print('Finished Training')
 
+
+if not os.path.exists('./saved_models'):
+    os.makedirs('./saved_models')
 path = './saved_models/cifar100_simple.pth'
 torch.save(model.state_dict(), path)
 
-# if __name__ == "__main__":
-#     training(model, trainloader)
+print('Model Saved')
 
 
 

@@ -44,3 +44,15 @@ b. ResNet-18 Model
 ./CIFAR10_ResNet.sh
 ```
 
+III) CIFAR100 DATASET
+
+a. Simple CNN model (based on LeNet-5)
+
+```
+./CIFAR100_SimpleCNN.sh
+```
+b. ResNet-18 Model
+
+```
+./CIFAR100_ResNet.sh
+```

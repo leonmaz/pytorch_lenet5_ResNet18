@@ -15,7 +15,7 @@ from datasets.mnist_load import load_mnist
 
 path = './saved_models/MNIST_resnet.pth'
 if not os.path.exists(path):
-    print("Model is not created, run file 'MNIST_ResNet_trainer.py' first")
+    print("Model is not created, run file 'MNIST_ResNet_Trainer.py' first")
     exit()
 
 model = ResNet(1, 18, BasicBlock, 10)

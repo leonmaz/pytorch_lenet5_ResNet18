@@ -10,11 +10,12 @@ import matplotlib.pyplot as plt
 import numpy as np 
 import os 
 
-from networks import SimpleCNN
+from models.networks import SimpleCNN
+from datasets.cifar100_load import cifar100_mean_std
 
 path = './saved_models/cifar100_simple.pth'
 if not os.path.exists(path):
-    print("Model is not created, run file 'cifar100_SimpleCNNtrainer.py' first")
+    print("Model is not created, run file 'CIFAR100_Simple_Trainer.py' first")
     exit()
 
 model = SimpleCNN(3,100)
@@ -23,7 +24,7 @@ model.load_state_dict(torch.load(path))
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
-    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+    transforms.Normalize(mean=(cifar100_mean_std()[1],cifar100_mean_std()[2],cifar100_mean_std()[3]), std=(cifar100_mean_std()[4],cifar100_mean_std()[5],cifar100_mean_std()[6]))])
 
 batch_size = 4
 

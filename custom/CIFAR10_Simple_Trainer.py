@@ -1,5 +1,6 @@
 import torch
 import torchvision
+import os
 import torchvision.transforms as  transforms
 
 import torch.nn as nn 
@@ -10,12 +11,12 @@ import matplotlib.pyplot as plt
 import numpy as np 
 
 from models.networks import SimpleCNN
-from datasets.cifar10_load import load_cifar10
+from datasets.cifar10_load import cifar10_mean_std
 
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
-    transforms.Normalize(mean=(load_cifar10()[2],load_cifar10()[3],load_cifar10()[4]), std=(load_cifar10()[5],load_cifar10()[6],load_cifar10()[7]))])
+    transforms.Normalize(mean=(cifar10_mean_std()[1],cifar10_mean_std()[2],cifar10_mean_std()[3]), std=(cifar10_mean_std()[4],cifar10_mean_std()[5],cifar10_mean_std()[6]))])
 
 batch_size = 4
 
@@ -61,6 +62,9 @@ for epoch in range(10):  # loop over the dataset multiple times
 
 print('Finished Training')
 
+
+if not os.path.exists('./saved_models'):
+    os.makedirs('./saved_models')
 path = './saved_models/cifar10_simple.pth'
 torch.save(model.state_dict(), path)
 

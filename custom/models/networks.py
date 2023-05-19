@@ -1,8 +1,9 @@
 #Simple CNN -> Simple Convolutional Neural based on LeNet-5 (https://ieeexplore.ieee.org/document/726791) 
-# --> CIFAR10 accuracy =~ 54%, CIFAR100 =~ , MNIST =~ 98%
+# --> CIFAR10 accuracy =~ 54%, CIFAR100 =~ 24%, MNIST =~ %
 
 #ResNet -> ResNet18 Residual Neural Network (https://arxiv.org/abs/1512.03385)
 # --> CIFAR10 accuracy =~ 74%, , CIFAR100 =~ , MNIST =~ 97%
+
 
 import torch
 import torch.nn as nn
