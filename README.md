@@ -20,12 +20,12 @@ source ./virtualenv/set_env.sh
 
 I) MNIST DATASET
 
-	a. Simple CNN model (based on LeNet-5)
+a. Simple CNN model (based on LeNet-5)
 
 ```
 ./MNIST_SimpleCNN.sh
 ```
-	b. ResNet-18 Model
+b. ResNet-18 Model
 
 ```
 ./MNIST_ResNet.sh
@@ -33,12 +33,12 @@ I) MNIST DATASET
 
 II) CIFAR10 DATASET
 
-	a. Simple CNN model (based on LeNet-5)
+a. Simple CNN model (based on LeNet-5)
 
 ```
 ./CIFAR10_SimpleCNN.sh
 ```
-	b. ResNet-18 Model
+b. ResNet-18 Model
 
 ```
 ./CIFAR10_ResNet.sh
