@@ -1,5 +1,3 @@
-############################### Federated Learning Project ###############################
-
 ## (Optional) 1. Set up a virtual environment
 
 ```
